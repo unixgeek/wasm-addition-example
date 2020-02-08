@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en-us">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <style type="text/css">
+        input {
+            margin: 1em;
+            width: 4em;
+        }
+
+        button {
+            margin-top: 1em;
+        }
+    </style>
+    <script type="text/javascript" src="wasm_addition_example.js"></script>
+    <script type="text/javascript">
+        const add = Module.cwrap(
+            'lame_add', // name of C function,
+            'number', // return type
+            ['number', 'number']); // argument types
+
+        function do_math() {
+            var n1 = document.getElementById("n1").value;
+            var n2 = document.getElementById("n2").value;
+
+            var result = add(n1, n2);
+
+            document.getElementById("result").innerText = result;
+        }
+    </script>
+    <title>wasm-addition-example cwrap</title>
+</head>
+<body>
+<label>n1:<input id="n1" type="number"/></label><br/>
+<label>n2:<input id="n2" type="number"/></label><br/>
+<button onclick="do_math()">Add</button>
+<br/><br/>
+<label>result: <span id="result"></span></label>
+</body>
+</html>
